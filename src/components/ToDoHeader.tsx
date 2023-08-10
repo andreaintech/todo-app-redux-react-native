@@ -1,8 +1,23 @@
 import React, {useState} from 'react'
-import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TextInput, View, TouchableOpacity, Alert } from 'react-native'
+import { useDispatch } from 'react-redux';
+import {addToDo} from '../redux/taskToDo';
 
 const ToDoHeader = () => {
+    const dispatch = useDispatch();
     const [toDo, setToDo] = useState("");
+
+    const onSubmitToDo = () => {
+        if(toDo.trim().length === 0) {
+            Alert.alert('You need to add a to do');
+            setToDo("");
+            return;
+        }
+
+        dispatch(addToDo({toDo}));
+
+        setToDo("");
+    }
 
     return (
         <View>
@@ -43,6 +58,7 @@ const ToDoHeader = () => {
                         borderRadius: 5,
                         alignItems: "center"
                     }} 
+                    onPress={onSubmitToDo}
                 >
                     <Text 
                         style={{

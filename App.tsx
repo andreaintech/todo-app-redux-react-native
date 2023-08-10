@@ -2,6 +2,8 @@ import React from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import ToDoHeader from './src/components/ToDoHeader';
 import ToDoList from './src/components/ToDoList';
+import store from './src/redux/store';
+import {Provider} from 'react-redux';
 
 function App(): JSX.Element {
   const RootApp = () => {
@@ -14,7 +16,9 @@ function App(): JSX.Element {
 }
 
   return (
-    <RootApp />
+    <Provider store={store}>
+      <RootApp />
+    </Provider>
   );
 }
 
